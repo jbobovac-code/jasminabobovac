@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Jasmina Bobovac — Kako si?</title>
+<style>
+  /* System font fallbacks - no external dependency */
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Mono:ital,wght@0,300;1,300&display=swap');
+</style>
+
+<style>
+  :root {
+    --cream: #f5f0e8;
+    --ink: #1a1510;
+    --rust: #8b3a2a;
+    --rust-light: #c06040;
+    --warm-mid: #7a6a5a;
+    --paper: #ede7d9;
+    --border: #c8bfaf;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Libre Baskerville', Georgia, 'Times New Roman', serif;
+    font-size: 17px;
+    line-height: 1.75;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE TEXTURE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.025;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-size: 200px 200px;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 4rem;
+    background: rgba(245, 240, 232, 0.92);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', 'Palatino Linotype', Palatino, Georgia, serif;
+    font-size: 1.1rem;
+    font-weight: 300;
+    letter-spacing: 0.12em;
+    color: var(--ink);
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'DM Mono', 'Courier New', Courier, monospace;
+    font-size: 0.72rem;
+    font-weight: 300;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--warm-mid);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--rust); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 80px;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 6rem 4rem 6rem 6rem;
+    animation: fadeUp 1s ease both;
+  }
+
+  .hero-label {
+    font-family: 'DM Mono', 'Courier New', Courier, monospace;
+    font-size: 0.7rem;
+    font-weight: 300;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', 'Palatino Linotype', Palatino, Georgia, serif;
+    font-size: clamp(4.5rem, 9vw, 8rem);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-subtitle {
+    font-family: 'Libre Baskerville', Georgia, 'Times New Roman', serif;
+    font-size: 1rem;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--warm-mid);
+    max-width: 380px;
+    line-height: 1.8;
+    margin-bottom: 3rem;
+    border-left: 2px solid var(--rust);
+    padding-left: 1.2rem;
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-family: 'DM Mono', 'Courier New', Courier, monospace;
+    font-size: 0.75rem;
+    font-weight: 300;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 0.3rem;
+    width: fit-content;
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .hero-cta:hover { color: var(--rust); border-color: var(--rust); }
+  .hero-cta::after { content: '→'; transition: transform 0.2s; }
+  .hero-cta:hover::after { transform: translateX(4px); }
+
+  .hero-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6rem 6rem 6rem 2rem;
+    animation: fadeUp 1s 0.2s ease both;
+    position: relative;
+  }
+
+  .book-cover {
+    width: 280px;
+    height: 400px;
+    background: var(--ink);
+    position: relative;
+    box-shadow: 16px 24px 60px rgba(26,21,16,0.3), 4px 6px 20px rgba(26,21,16,0.15);
+    transform: rotate(-2deg);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    flex-shrink: 0;
+  }
+
+  .book-cover:hover {
+    transform: rotate(0deg) translateY(-6px);
+    box-shadow: 20px 32px 80px rgba(26,21,16,0.35), 4px 6px 20px rgba(26,21,16,0.15);
+  }
+
+  .book-cover-inner {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 2rem 1.6rem;
+    background: linear-gradient(160deg, #2a1f14 0%, #1a1510 60%, #0f0c08 100%);
+    border-left: 4px solid var(--rust);
+  }
+
+  .book-cover-author {
+    font-family: 'DM Mono', 'Courier New', Courier, monospace;
+    font-size: 0.65rem;
+    font-weight: 300;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(200,190,175,0.7);
+  }
+
+  .book-cover-title {
+    font-family: 'Cormorant Garamond', 'Palatino Linotype', Palatino, Georgia, serif;
+    font-size: 3.2rem;
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1;
+    color: var(--cream);
+    letter-spacing: -0.02em;
+  }
+
+  .book-cover-year {
+    font-family: 'DM Mono', 'Courier New', Courier, monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    color: var(--rust-light);
+  }
+
+  .book-cover-line {
+    position: absolute;
+    bottom: 70px;
+    left: 1.6rem;
+    right: 1.6rem;
+    height: 1px;
+    background: rgba(200,190,175,0.2);
+  }
+
+  .hero-bg-text {
+    position: absolute;
+    font-family: 'Cormorant Garamond', 'Palatino Linotype', Palatino, Georgia, serif;
+    font-size: 14rem;
+    font-weight: 600;
+    color: rgba(26,21,16,0.04);
+    right: -2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    line-height: 1;
+    pointer-events: none;
+    letter-spacing: -0.05em;
+    user-select: none;
+  }
+
+  /* ── SECTIONS COMMON ── */
+  section { padding: 8rem 6rem; }
+
+  .section-label {
+    font-family: 'DM Mono', 'Courier New', Courier, monospace;
+    font-size: 0.68rem;
+    font-weight: 300;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .section-label::after {
+    content: '';
+    display: block;
+    height: 1px;
+    width: 40px;
+    background: var(--rust);
+    opacity: 0.5;
+  }
+
+  .section-heading {
+    font-family: 'Cormorant Garamond', 'Palatino Linotype', Palatino, Georgia, serif;
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 3rem;
+  }
+
+  /* ── KNJIGA / BOOK ── */
+  #knjiga {
+    background: var(--paper);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .knjiga-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: start;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .knjiga-text p {
+    color: var(--warm-mid);
+    margin-bottom: 1.4rem;
+    font-size: 1rem;
+  }
+
+  .knjiga-text p:first-of-type {
+    font-size: 1.12rem;
+    color: var(--ink);
+    font-style: italic;
+  }
+
+  .knjiga-details {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .detail-item label {
+    font-family: 'DM Mono', 'Courier New', Courier, monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--rust);
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+
+  .detail-item span {
+    font-size: 0.92rem;
+    color: var(--ink);
+  }
+
+  .knjiga-quote {
+    padding: 3rem;
+    background: var(--cream);
+    border-left: 3px solid var(--rust);
+    position: sticky;
+    top: 6rem;
+  }
+
+  .knjiga-quote blockquote {
+    font-family: 'Cormorant Garamond', 'Palatino Linotype', Palatino, Georgia, serif;
+    font-size: 1.6rem;
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.4;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+  }
+
+  .knjiga-quote cite {
+    font-family: 'DM Mono', 'Courier New', Courier, monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    color: var(--warm-mid);
+    font-style: normal;
+  }
+
+  /* ── O MENI ── */
+  #o-meni {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: 6rem;
+    padding-right: 6rem;
+  }
+
+  .omeni-layout {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 6rem;
+    align-items: start;
+  }
+
+  .omeni-aside {
+    position: sticky;
+    top: 6rem;
+  }
+
+  .omeni-portrait {
+    width: 100%;
+    aspect-ratio: 3/4;
+    background: var(--paper);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .omeni-portrait-placeholder {
+    font-family: 'Cormorant Garamond', 'Palatino Linotype', Palatino, Georgia, serif;
+    font-size: 5rem;
+    font-style: italic;
+    color: var(--border);
+    font-weight: 300;
+  }
+
+  .omeni-portrait img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+  }
+
+  .omeni-portrait-caption {
+    font-family: 'DM Mono', 'Courier New', Courier, monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    color: var(--warm-mid);
+    text-transform: uppercase;
+  }
+
+  .omeni-body p {
+    color: var(--warm-mid);
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+  }
+
+  .omeni-body p:first-child {
+    font-size: 1.12rem;
+    color: var(--ink);
+  }
+
+  .omeni-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 2.5rem;
+  }
+
+  .omeni-tag {
+    font-family: 'DM Mono', 'Courier New', Courier, monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink);
+    border: 1px solid var(--border);
+    padding: 0.3rem 0.8rem;
+  }
+
+  /* ── BLOG ── */
+  #blog {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 8rem 6rem;
+  }
+
+  #blog .section-label { color: var(--rust-light); }
+  #blog .section-label::after { background: var(--rust-light); }
+  #blog .section-heading { color: var(--cream); }
+
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 0;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .blog-card {
+    background: rgba(255,255,255,0.03);
+    padding: 2.5rem;
+    border: 1px solid rgba(200,190,175,0.1);
+    cursor: pointer;
+    transition: background 0.3s;
+    position: relative;
+  }
+
+  .blog-card:hover { background: rgba(255,255,255,0.07); }
+
+  .blog-card-date {
+    font-family: 'DM Mono', 'Courier New', Courier, monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.15em;
+    color: var(--rust-light);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .blog-card-title {
+    font-family: 'Cormorant Garamond', 'Palatino Linotype', Palatino, Georgia, serif;
+    font-size: 1.5rem;
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.2;
+    color: var(--cream);
+    margin-bottom: 1rem;
+  }
+
+  .blog-card-excerpt {
+    font-size: 0.88rem;
+    line-height: 1.7;
+    color: rgba(200,190,175,0.6);
+  }
+
+  .blog-card-arrow {
+    position: absolute;
+    bottom: 2.5rem;
+    right: 2.5rem;
+    font-size: 0.9rem;
+    color: var(--rust-light);
+    opacity: 0;
+    transition: opacity 0.3s, transform 0.3s;
+  }
+
+  .blog-card:hover .blog-card-arrow { opacity: 1; transform: translateX(4px); }
+
+  /* ── KONTAKT ── */
+  #kontakt {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 8rem 6rem;
+    text-align: center;
+  }
+
+  #kontakt .section-label { justify-content: center; }
+  #kontakt .section-label::after { display: none; }
+  #kontakt .section-label::before {
+    content: '';
+    display: block;
+    height: 1px;
+    width: 40px;
+    background: var(--rust);
+    opacity: 0.5;
+  }
+
+  .kontakt-intro {
+    color: var(--warm-mid);
+    font-style: italic;
+    margin-bottom: 3.5rem;
+    font-size: 1.05rem;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 3.5rem;
+  }
+
+  .kontakt-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: left;
+  }
+
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+
+  .form-group label {
+    font-family: 'DM Mono', 'Courier New', Courier, monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--warm-mid);
+  }
+
+  .form-group input,
+  .form-group textarea {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--border);
+    padding: 0.7rem 0;
+    font-family: 'Libre Baskerville', Georgia, 'Times New Roman', serif;
+    font-size: 0.95rem;
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.2s;
+    width: 100%;
+    resize: none;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus { border-color: var(--rust); }
+
+  .form-group textarea { min-height: 120px; }
+
+  .form-submit {
+    align-self: flex-end;
+    margin-top: 1rem;
+    font-family: 'DM Mono', 'Courier New', Courier, monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    background: var(--ink);
+    color: var(--cream);
+    border: none;
+    padding: 1rem 2.5rem;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .form-submit:hover { background: var(--rust); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--paper);
+    border-top: 1px solid var(--border);
+    padding: 3rem 6rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-name {
+    font-family: 'Cormorant Garamond', 'Palatino Linotype', Palatino, Georgia, serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--ink);
+    font-weight: 300;
+  }
+
+  .footer-copy {
+    font-family: 'DM Mono', 'Courier New', Courier, monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    color: var(--warm-mid);
+    text-transform: uppercase;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1.2rem; }
+    section { padding: 5rem 1.5rem; }
+    #hero { grid-template-columns: 1fr; min-height: auto; padding-top: 80px; }
+    .hero-left { padding: 4rem 1.5rem 2rem; }
+    .hero-right { padding: 2rem 1.5rem 4rem; }
+    .hero-bg-text { display: none; }
+    .knjiga-grid, .omeni-layout { grid-template-columns: 1fr; gap: 3rem; }
+    .knjiga-quote { position: static; }
+    .blog-grid { grid-template-columns: 1fr; }
+    .omeni-aside { position: static; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; }
+    #o-meni, #kontakt { padding-left: 1.5rem; padding-right: 1.5rem; }
+    #blog { padding: 5rem 1.5rem; }
+  }
+
+  /* ── RECENZIJE ── */
+  #recenzije {
+    background: var(--cream);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 8rem 6rem;
+  }
+
+  .recenzije-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4rem;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  .recenzija-item {
+    padding: 2.5rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .recenzija-item:last-child {
+    border-bottom: none;
+  }
+
+  .recenzija-tekst {
+    font-family: 'Libre Baskerville', Georgia, 'Times New Roman', serif;
+    font-size: 1rem;
+    font-style: italic;
+    line-height: 1.9;
+    color: var(--warm-mid);
+    margin-bottom: 1.5rem;
+    position: relative;
+    padding-left: 2rem;
+  }
+
+  .recenzija-tekst::before {
+    content: '\201E';
+    font-family: 'Cormorant Garamond', 'Palatino Linotype', Palatino, Georgia, serif;
+    font-size: 4rem;
+    color: var(--rust);
+    opacity: 0.4;
+    position: absolute;
+    left: -0.5rem;
+    top: -1rem;
+    line-height: 1;
+  }
+
+  .recenzija-autor {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    padding-left: 2rem;
+  }
+
+  .recenzija-ime {
+    font-family: 'Cormorant Garamond', 'Palatino Linotype', Palatino, Georgia, serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: 0.02em;
+  }
+
+  .recenzija-titula {
+    font-family: 'DM Mono', 'Courier New', Courier, monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--rust);
+  }
+
+
+  /* ── ISTAKNUTI CITAT ── */
+  #citat {
+    background: var(--ink);
+    padding: 7rem 6rem;
+    text-align: center;
+  }
+
+  .citat-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .citat-glavna {
+    font-family: 'Cormorant Garamond', 'Palatino Linotype', Palatino, Georgia, serif;
+    font-size: clamp(1.4rem, 3vw, 2.1rem);
+    font-weight: 300;
+    line-height: 1.55;
+    color: var(--cream);
+    margin-bottom: 1.2rem;
+  }
+
+  .citat-glavna strong {
+    font-weight: 600;
+    color: var(--rust-light);
+    font-style: normal;
+    letter-spacing: 0.08em;
+  }
+
+  .citat-iz-knjige {
+    font-family: 'Libre Baskerville', Georgia, 'Times New Roman', serif;
+    font-size: 0.95rem;
+    font-style: italic;
+    line-height: 1.8;
+    color: rgba(200,190,175,0.65);
+    margin-bottom: 2rem;
+  }
+
+  .citat-potpis {
+    font-family: 'DM Mono', 'Courier New', Courier, monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--rust-light);
+  }
+
+  .citat-linija {
+    width: 40px;
+    height: 1px;
+    background: var(--rust);
+    opacity: 0.6;
+    margin: 0 auto 1.5rem;
+  }
+
+
+  /* ── UTISCI ČITALACA ── */
+  #utisci {
+    background: var(--paper);
+    border-top: 1px solid var(--border);
+    padding: 7rem 6rem;
+    text-align: center;
+  }
+
+  .utisci-intro {
+    max-width: 580px;
+    margin: 0 auto 3rem;
+    font-family: 'Libre Baskerville', Georgia, 'Times New Roman', serif;
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--warm-mid);
+    line-height: 1.8;
+  }
+
+  .utisci-dugme {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-family: 'DM Mono', 'Courier New', Courier, monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    background: var(--ink);
+    color: var(--cream);
+    border: none;
+    padding: 1rem 2.5rem;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .utisci-dugme:hover { background: var(--rust); }
+
+</style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">Jasmina Bobovac</a>
+  <ul class="nav-links">
+    <li><a href="#knjiga">Knjiga</a></li>
+    <li><a href="#o-meni">O meni</a></li>
+    <li><a href="#blog">Tekstovi</a></li>
+    <li><a href="#recenzije">Recenzije</a></li>
+    <li><a href="#kontakt">Kontakt</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left">
+    <p class="hero-label">Debitantski roman · 2025</p>
+    <h1 class="hero-title">Kako<br>si?</h1>
+    <p class="hero-subtitle">
+      Pitanje koje postavljamo svaki dan, a retko znamo šta zaista pitamo.
+      Roman o glasovima koji ostaju kada ćutanje postane preteško.
+    </p>
+    <a href="#knjiga" class="hero-cta">Saznaj više</a>
+  </div>
+  <div class="hero-right">
+    <span class="hero-bg-text" aria-hidden="true">?</span>
+    <div class="book-cover" aria-hidden="true">
+      <img src="images/korica.jpg" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;" alt="Korica knjige Kako si?" />
+    </div>
+  </div>
+</section>
+
+
+<!-- ISTAKNUTI CITAT -->
+<section id="citat">
+  <div class="citat-wrap reveal">
+    <div class="citat-linija"></div>
+    <p class="citat-glavna">
+      U životu je neizmerno važno imati bar jednu osobu<br>
+      koja vas iskreno pita: <strong>KAKO SI?</strong>
+    </p>
+    <p class="citat-iz-knjige">
+      Neka mesta, kao i ljude, morate da upoznate u nekom periodu života.<br>
+      Samo je kvaka u tome — da li vidite znakove pored puta?<br>
+      Ja sam videla!
+    </p>
+    <span class="citat-potpis">— Jasmina Bobovac</span>
+  </div>
+</section>
+
+<!-- KNJIGA -->
+<section id="knjiga">
+  <div class="knjiga-grid">
+    <div class="knjiga-text reveal">
+      <div class="section-label">Roman</div>
+      <h2 class="section-heading">Kako si?</h2>
+
+      <p>
+        Debitantski roman Jasmine Bobovac prati priču koja počinje jednim
+        jednostavnim pitanjem — onim koje izgovaramo automatski, ne čekajući
+        odgovor. Šta se dešava kada neko zaista odgovori?
+      </p>
+      <p>
+        Ispisan jezikom koji dolazi pravo iz govorne reči, roman nosi ritam
+        živih glasova i trenutaka koji ostaju s nama dugo nakon poslednje stranice.
+      </p>
+      <p>
+        Pisanje koje je počelo pre dvadeset godina, sazrevalo u tišini,
+        i na kraju pronašlo put do čitaoca — knjiga koja zna da sačeka.
+      </p>
+
+      <div class="knjiga-details">
+        <div class="detail-item">
+          <label>Žanr</label>
+          <span>Roman</span>
+        </div>
+        <div class="detail-item">
+          <label>Godina</label>
+          <span>2025</span>
+        </div>
+        <div class="detail-item">
+          <label>Autor</label>
+          <span>Jasmina Bobovac</span>
+        </div>
+        <div class="detail-item">
+          <label>Jezik</label>
+          <span>Srpski</span>
+        </div>
+        <div class="detail-item" style="grid-column:1/-1;">
+          <label>ISBN</label>
+          <span>978-86-907948-0-5</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="knjiga-quote reveal">
+      <blockquote>
+        „Pitanje koje svi postavljamo — i niko ne čeka da čuje odgovor."
+      </blockquote>
+      <cite>— iz romana</cite>
+    </div>
+  </div>
+</section>
+
+
+<!-- RECENZIJE -->
+<section id="recenzije">
+  <div style="max-width:860px;margin:0 auto;">
+    <div class="section-label reveal">Recenzije</div>
+    <h2 class="section-heading reveal">Recenzenti</h2>
+
+    <div class="recenzije-grid" style="margin-top:3rem;">
+
+      <div class="recenzija-item reveal">
+        <p class="recenzija-tekst">
+          Možda bi se neko zapitao zašto tek sada čitamo kratki roman Jasmine Bobovac nazvan
+          <em>Kako si?</em> Jasminu je morao da, poput Doroti iz Čarobnjaka iz Oza, užasan tornado
+          ponese kroz lavirinte života, da bi se iz tog putovanja — a ono još uvek traje — desilo
+          rođenje ovog proznog književnog dela, njenog prvenca. Taj put uči da život nije bolest,
+          ali da i bolest može da, ako baš mora, bude deo života. Niko nije savršen, ali vitezovi
+          i dobrota ipak postoje i nose na svojim leđima veru da će lepota i plemenitost spasiti
+          ovaj pomalo izgubljen svet. Jasminini Heroj, Leptir, Gari, Vuk nas uče da, poput Lava,
+          Strašila i Limenog čoveka, svako na svoj način, čitamo znakove pored puta — jer, čuda su
+          uvek moguća, ako znamo da ih prepoznamo i nateramo da se dese. Može se reći da je
+          <em>Kako si?</em> Vodič za "otpisane". Očekujem nastavak.
+        </p>
+        <div class="recenzija-autor">
+          <span class="recenzija-ime">Zoran Đorđević</span>
+          <span class="recenzija-titula">Reditelj</span>
+        </div>
+      </div>
+
+      <div class="recenzija-item reveal">
+        <p class="recenzija-tekst">
+          Ispovest, dnevnik, oda životu ili priča pobednika?! Zapravo, sve to zajedno nalazi se
+          između korica knjige-romana Jasmine Bobovac naslova <em>Kako si?</em> Stilom iskusnog
+          pripovedača, savremenom jezičkom formom i naracijom u prvom licu, ona postavlja više
+          pitanja od kojih je najteže, najintrigantnije, neugodno pa i porazno ono: "Kako živeti
+          sa saznanjem da imaš rak?" Kada se pod ruku uhvate strah, samoća, neizvesnost i druge
+          guste magle — onda je to pravi košmar. U toj svojevrsnoj igri prestola, strpljenje,
+          hrabrost i optimizam ne sme vas napuštati sve dok je ne savladate. Borba junakinje
+          Jasminog romana nije bila uzaludna. Srebrni pehar pobednika visoko je podigla iznad
+          glave, ponosna na svoju nepopustljivu želju da ide dalje kroz bajku života. Uz iskrenu
+          preporuku da pročitate roman <em>Kako si</em>, predlažem vam da smanjite brzinu
+          kretanja — kako bi bolje videli sjaj u očima Jasminine junakinje, pobednice i srećnice!
+        </p>
+        <div class="recenzija-autor">
+          <span class="recenzija-ime">Budimir Budo Novović</span>
+          <span class="recenzija-titula">Novinar</span>
+        </div>
+      </div>
+
+      <div class="recenzija-item reveal">
+        <p class="recenzija-tekst">
+          Roman <em>Kako si?</em> predstavlja jedinstveno literarno delo sastavljeno od
+          intimističkih beležaka koje prate tok jednog života kroz različite vremenske periode.
+          Autorka vešto oslikava različite faze postojanja, povezujući trenutke iz prošlosti sa
+          onima iz sadašnjosti, stvarajući tako duboko emotivnu sliku o životu, ljubavima,
+          porodici, prijateljstvima i unutrašnjim borbama. Roman ne teži da ponudi odgovore ili
+          rešenja, već nas poziva na razmišljanje i refleksiju. Autorka majstorski stvara atmosferu
+          u kojoj se čitatelj oseća kao deo priče. Roman je istovremeno nostalgičan i optimističan —
+          bavi se onim što nas oblikuje, sa svim svojim svetlim i tamnim stranama, i podseća nas
+          da život, uprkos svim izazovima, ima svoju neprocenjivu vrednost. Jasmina koristi
+          jednostavan, ali snažan jezik koji čini čitanje prijatnim i pristupačnim, savršenim za
+          opuštanje uz kafu ili kao sadrug u dugim noćima bez sna.
+        </p>
+        <div class="recenzija-autor">
+          <span class="recenzija-ime">Sandra Sofronić</span>
+          <span class="recenzija-titula">Profesor srpskog jezika i književnosti</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- UTISCI ČITALACA -->
+<section id="utisci">
+  <div class="section-label reveal" style="justify-content:center;">Utisci čitalaca</div>
+  <h2 class="section-heading reveal" style="text-align:center;">Pročitali ste knjgu?</h2>
+  <p class="utisci-intro reveal">
+    Utisci onih koji su pročitali „Kako si?" najdragocenije su što autorka može da dobije. 
+    Podelite svoja zapažanja — svaka reč stiže direktno do nje.
+  </p>
+  <a href="/cdn-cgi/l/email-protection#b8d296dad7dad7ced9dbf8dfd5d9d1d496dbd7d587cbcddad2dddbcc85edccd1cbd9d398d798d3d6d2d1c2d198f3d9d3d798cbd187" class="utisci-dugme reveal">
+    Pošaljite utisak →
+  </a>
+</section>
+
+<!-- O MENI -->
+<section id="o-meni">
+  <div class="omeni-layout">
+    <div class="omeni-aside reveal">
+      <div class="omeni-portrait">
+        <img src="images/autor.jpg" alt="Jasmina Bobovac" />
+      </div>
+      <p class="omeni-portrait-caption">Jasmina Bobovac · Valjevo</p>
+      <div class="omeni-tags" style="margin-top:1.5rem;">
+        <span class="omeni-tag">Autor</span>
+        <span class="omeni-tag">Novinar</span>
+        <span class="omeni-tag">Radio</span>
+        <span class="omeni-tag">Valjevo</span>
+      </div>
+    </div>
+
+    <div class="omeni-body reveal">
+      <div class="section-label">O meni</div>
+      <h2 class="section-heading">Između reči<br>i mikrofonа</h2>
+
+      <p>
+        Godinama sam govorila u radijski mikrofon — birala reči koje nestaju čim ih
+        izgovorim. Pisanje je nešto drugo: reč ostaje, čeka, trpi čitanje
+        iznova i iznova. Naučila sam da poštujem tu razliku.
+      </p>
+      <p>
+        Kao novinarka i spiker Radio Valjeva, provela sam godine u svetu
+        koji živi od trenutka. Roman „Kako si?" nastajao je sporije — počeo
+        oko 2004, pauzirao, vratio se — i to ga je oblikovalo. Neke priče
+        trebaju vremena da sazru.
+      </p>
+      <p>
+        Studirala sam na Filološkom fakultetu u Beogradu. Živim i pišem u Valjevu.
+        Radim na novim rukopisima — jer jedno pitanje uvek povlači sledeće.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- BLOG -->
+<section id="blog">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div class="section-label reveal">Tekstovi</div>
+    <h2 class="section-heading reveal">Misli između<br>poglavlja</h2>
+
+    <div class="blog-grid" style="margin-top:3rem;">
+
+      <!-- PRIČA 1: Remstrupvej 36 -->
+      <div class="blog-card reveal" onclick="togglePrica('remstrupvej')" style="cursor:pointer;">
+        <p class="blog-card-date">Mart 2026 · pohvalio žiri Klub putnika, konkurs Spasimo putopis</p>
+        <h3 class="blog-card-title">Remstrupvej 36</h3>
+        <p class="blog-card-excerpt">
+          U Silkeborg sam stigla aprila 1985, pravo u čeljusti najgore zime veka. 
+          Danska me je dočekala snežnom mećavom i polarnim vazduhom koji je šibao 
+          ravan pejzaž pravo u lice...
+        </p>
+        <span class="blog-card-arrow" id="arrow-remstrupvej">Čitaj priču →</span>
+      </div>
+
+      <!-- Ostale priče - na konkursima -->
+      <div class="blog-card reveal" style="opacity:0.5;cursor:default;pointer-events:none;">
+        <p class="blog-card-date">Na konkursu · rezultati uskoro</p>
+        <h3 class="blog-card-title">Priča u pripremi</h3>
+        <p class="blog-card-excerpt">
+          Tekst je trenutno na književnom konkursu i biće objavljen po 
+          oglašavanju rezultata.
+        </p>
+      </div>
+
+      <div class="blog-card reveal" style="opacity:0.5;cursor:default;pointer-events:none;">
+        <p class="blog-card-date">Na konkursu · rezultati uskoro</p>
+        <h3 class="blog-card-title">Priča u pripremi</h3>
+        <p class="blog-card-excerpt">
+          Tekst je trenutno na književnom konkursu i biće objavljen po 
+          oglašavanju rezultata.
+        </p>
+      </div>
+
+    </div>
+
+    <!-- RAZVIJENI TEKST PRIČE -->
+    <div id="prica-remstrupvej" style="display:none;max-width:740px;margin:4rem auto 0;padding:3rem;background:rgba(255,255,255,0.04);border-left:3px solid var(--rust-light);">
+      <button onclick="togglePrica('remstrupvej')" style="background:none;border:none;color:var(--rust-light);font-family:'DM Mono','Courier New',monospace;font-size:0.68rem;letter-spacing:0.15em;text-transform:uppercase;cursor:pointer;margin-bottom:2rem;display:block;">← Zatvori</button>
+      <h2 style="font-family:'Cormorant Garamond','Palatino Linotype',Georgia,serif;font-size:2.2rem;font-weight:300;font-style:italic;color:var(--cream);margin-bottom:0.5rem;">Remstrupvej 36</h2>
+      <p style="font-family:'DM Mono','Courier New',monospace;font-size:0.62rem;letter-spacing:0.15em;color:var(--rust-light);text-transform:uppercase;margin-bottom:2.5rem;">Jasmina Bobovac</p>
+      <div class="prica-tekst" style="font-family:'Libre Baskerville',Georgia,serif;font-size:0.95rem;line-height:1.9;color:rgba(200,190,175,0.85);">
+        <p>U Silkeborg sam stigla aprila 1985, pravo u čeljusti najgore zime veka. Proleće je te godine bilo samo mit u koji niko više nije verovao. Danska me je dočekala snežnom mećavom i polarnim vazduhom koji je šibao ravan pejzaž pravo u lice. Putovanje kolima sa kumovima trajalo je večno. Sati su se topili u mirisu benzina i grozne, prozirne kafe koja je više ličila na prljavu vodu nego na napitak. Već mi je falila naša domaća, crna kafa koja zamiriše celu ulicu.</p>
+        <p>Kad smo konačno stigli, samo sam primetila da je naselje izgledalo kao da ga je nacrtao pedantni arhitekta. Sve kuće od identične fasadne cigle, poređane u savršen, skoro zastrašujući niz. Srušila sam se u krevet i potonula u san bez snova.</p>
+        <p>Probudila sam se sama u kući koja je na dnevnom svetlu delovala manja nego što sam je sinoć videla. Nekako tesna. Kumovi su bili na poslu, a ja sam započela mali rat sa prostorom. Istraživala sam zidove dok iza jednog teškog ormara nisam nabasala na tanka, klizeća vrata. Povukla sam ih, a unutra me je dočekao mrak i žuta, bodljikava staklena vuna — slojevi izolacije. Tada mi je sinulo: Danci ne žive u kućama, oni žive u džinovskim termos bocama. Sve hermetički zatvoreno da ni mrvica toplote ne pobegne. Žuta vuna bila je moj prvi susret sa njihovim karakterom: spolja neosvojivo i hladno, unutra ušuškano oko jedne dragocene vatre.</p>
+        <p>Prvih dana, kuma Branka me je vodila po tržnom centru. Posle sat vremena lutanja, sele smo u restoran. Oko nas su Danci mirno jeli zelenu supu — intenzivno zelenu, boju kakvu nisam videla ni u jednom tanjiru. I pili pivo uz nju. Želudac mi se prevrnuo.</p>
+        <p>Kuma Branka je uhvatila moj pogled.</p>
+        <p>— Kod kuće imamo sarme — rekla je tiho.</p>
+        <p>I u toj rečenici bilo je sve: paralelni svetovi, spolja i unutra, njihov i naš koji se nikad neće spojiti, ali mogu da žive pod istim krovom.</p>
+        <p>Kasnije tog popodneva, kum Miško, kuma Branka i ja vozili smo se ka periferiji. Trebao im je novi frižider, a u Danskoj se takve stvari rešavaju uz kafu kod naših ljudi. Stigli smo kod prijatelja iz Loznice. Čim smo prešli prag, zapljusnuo me je zvuk harmonike sa kasete i miris domaće kafe.</p>
+        <p>Iz kuhinje je izronio njihov sin Momčilo. Bio je pun sebe, držao se kao da je on lično izmislio dansku kulturu, a mi ostali smo bili samo usputni putnici.</p>
+        <p>— Ne možeš celo veče da slušaš ovo zavijanja — rekao je, ne trudeći se da sakrije prezir prema očevoj muzici. — Brigite slavi rođendan. Biće tamo ekipa koju vredi znati.</p>
+        <p>Nije to bio poziv iz simpatije. Pre je to bila mešavina dosade i starinskog poštovanja prema mojim kumovima koje se još uvek žilavo držalo u njemu. Taj nadmeni poziv bio je moj izlaz iz lozničkih narodnjaka pravo u srce severa.</p>
+        <p>Spremila sam se po naški. Da sve sija. Kupila sam joj minđuše i osetila se kao kreten kad sam videla da niko drugi ne nosi poklon. Svi su ulazili sa paketima piva pod miškom. Pružila sam joj kutijicu, a ona me je gledala krupnim, tamnim očima.</p>
+        <p>— For me? — upitala je, dotičući ukrasnu traku.</p>
+        <p>— Da. Kod mene... we don't come empty hands — rekoh na indijanskom engleskom. Odmah ih je stavila.</p>
+        <p>— Beautiful! — nasmejala se. — Vidiš... my hair... Moji roditelji su letovali u Istri pre nego što sam se rodila. I am child of Adriatic.</p>
+        <p>— Ma ti si bre naša! — nasmejala sam se.</p>
+        <p>Kada nam je kod Brigite postalo previše tesno, čitava ekipa se, predvođena umišljenim Momčilom, preselila u centar. Zakoračila sam unutra i imala osećaj da sam promašila i grad i državu, pa čak i kontinent. Uletela sam pravo u vestern film. Pab je bio mračan. Mirisao je na staro drvo i duvan, a umesto običnih barskih stolica, uz šank su bila poređana prava kožna sedla sa uzengijama. Dok sam ja, u neverici, pokušavala da se popnem na jedno od njih a da ne padnem, sa druge strane šanka se začuo glas koji me je zamalo srušio na pod.</p>
+        <p>— Jebote, Jasmina! Pa otkud ti ovde? Ne verujem šta vidim! — izletelo je iz čoveka koji je upravo brisao čaše.</p>
+        <p>Zoran. Moj Valjevac usred Silkeborga. Čovek koji te služi pivom dok jašeš sedlo u zemlji gde sunce skoro da i ne zalazi. Ta psovka, taj naš ritam rečenice i iskrena radost u njegovim očima bili su najlepša muzika koju sam čula od odlaska iz Juge. Stajali smo zapanjeni sudarom sudbina koje su morale da pobegnu sa obala Kolubare da bi se srele ovde.</p>
+        <p>Odmah pored šanka, za jednim masivnim stolom, sedela je ljudina koja je dominirala prostorom. Bio je to Morten. Krupni Danac sa bradom koja je mirisala na pivo i sirovu harizmu. Čim je čuo Zoranov uzvik, Morten je lupio šakom o sto i pokazao na slobodno sedlo do mene.</p>
+        <p>— New face! — viknuo je Morten, a lice mu je već bilo crveno kao fasadna cigla mog naselja. Zoran je doneo kriglu i spustio je pred mene.</p>
+        <p>— Karlsbaja! — viknuo je Morten, grleći svoju kriglu.</p>
+        <p>Pogledala sam Zorana zbunjeno. On se samo nasmejao.</p>
+        <p>— Carlsberg. Oni tako izgovaraju.</p>
+        <p>Morten je podigao kriglu, prodrmao je kao da testira težinu, pa je iskapio jednim gutljajem. Uzdahnuo je kao zmaj i počeo da peva neku dansku pesmu. Tada sam shvatila da ti, naizgled hladni ljudi, imaju ventile koji eksplodiraju čim se upali prva svetiljka u pabu.</p>
+        <p>I dok je Morten još uvek držao poslednji ton svoje pesme, u taj oblak dima i smeha ušetao je on. Plav, u tankerici, viking sa hodom koji govori da mu ceo svet pripada. Pogledao me je i pokazao na moju paklicu cigareta na šanku.</p>
+        <p>— Can I... please? — upitao je.</p>
+        <p>— Take more — rekoh, pružajući paklu — Take three, four... uzmi koliko hoćeš.</p>
+        <p>Gledao me je kao da sam mu ponudila bogatstvo. Pola sata kasnije, vratio se sa celim paklom kupljenim na automatu. Pružio mi ga je sa poštovanjem.</p>
+        <p>— For you. Ja sam Bo.</p>
+        <p>— Ja sam Jasmina.</p>
+        <p>— Jasmina... ti si drugačija. In Denmark, we count. You... you give.</p>
+        <p>I tako je počelo moje druženje sa pravim vikingom. Živeo je u centru, gde su se ukrštali železnički čvorovi. Soba mu je mirisala na stare ploče i bunt. Na muški nered koji mi je prijao posle apotekarske tišine kod kumova. Tu sam sretala Mortena kako, bez ikakvog pardona, popravlja karburator usred sobe, na tepihu, dok mu je lice bilo musavo od ulja. Bo bi na to samo slegao ramenima, kao da je najnormalnija stvar na svetu imati delove motora pored gramofona, i pustio bi neku novu ploču.</p>
+        <p>Dok je igla šuštala po vinilu, a Morten psovao neki tvrdoglavi šraf, ja sam se zagledala kroz prozor. Gledala sam u sat, pa u nebo, i ništa mi nije bilo jasno. Sunce bi tek oko jedanaest uveče počelo polako da se povlači, ali čak ni tada ne bi sasvim nestalo. Ostavljalo je za sobom varljiv sumrak koji ne da da zaspiš i koji briše granicu između današnjeg i sutrašnjeg dana. U toj sobi, između mirisa benzina i neugasive svetlosti, prvi put sam osetila da vreme na severu teče po nekim sasvim drugim pravilima.</p>
+        <p>Brigite i ja smo počele da se viđamo i van ekipe. Najčešće u njenoj kuhinji, gde je pravila sendviče koji su bili previše mali za moj balkanski apetit, ali dovoljno veliki da uz njih pričamo satima. Jednog popodneva, dok smo pile kafu koja je konačno ličila na pravu, izvukla je kartu Evrope.</p>
+        <p>— Pogledaj — rekla je, pokazujući na plavičastu mrlju koja je predstavljala Jadran. — Moji roditelji su letovali ovde. Mama kaže da sam začeta na plaži kod Pule.</p>
+        <p>Nasmejala sam se. — Znači ti si bukvalno dete mora.</p>
+        <p>— A ti? — upitala me je, idući prstom preko ravnice do Balkana. — Kako je tamo?</p>
+        <p>— Drugačije — rekla sam, misleći na Gradac, na Pećinu, na Povlen. — Kod nas imaš brda za orijentaciju, sve je uklopljeno. Ovde je sve ravno — nebo i zemlja, kao da nema granice. Lako se izgubiš.</p>
+        <p>Pogledala me je krupnim, tamnim očima. — Ali zato imaš mene. I Boa. I tog ludog Mortena.</p>
+        <p>— Da — nasmeših se. — Imam vas.</p>
+        <p>Ustala je i donela mi komad papira. — Evo, upiši mi tvoju adresu u Jugoslaviji. Kad se vratiš, pisaćemo pisma.</p>
+        <p>Uzela sam papir. Pisala sam adresu polako, krupnim slovima, osećajući kako taj komad hartije postaje most koji će me vezivati za ovu kuhinju, ovu devojku, ovaj život. Brigite je presavila papir i stavila ga u džep farmerki.</p>
+        <p>— Sada si zauvek deo Danske — rekla je.</p>
+        <p>Često smo šetali oko jezera. Jednom, dok smo Brigite i ja hodale uz samu vodu u tom beskrajnom sumraku, severnjački mir me je potpuno preplavio, ali me je i plašio. Identične ulice i kuće od fasadne cigle počele bi da liče jedna na drugu pod neugasivim nebom. Zato sam u džepu uvek stezala komad papira na kojem sam krupno zapisala adresu: Remstrupvej 36. Taj papirić je bio moja jedina garancija da ću znati da se vratim u svoj termos.</p>
+        <p>Iako me je Silkeborg zbunjivao svojim mirom, uz Boa sam polako počela da osvajam taj prostor. On je bio ključ koji je otključavao vrata o kojima moji kumovi nisu ni sanjali. Imao je bajkersku opremu i za mene: tešku kožnu jaknu koja je mirisala na slobodu, i kacigu koja mi je bila toliko prevelika da je plesala oko moje glave pri svakom pokretu. Jedne večeri, samo je bacio tu jaknu pred mene na krevet.</p>
+        <p>— Idemo u Orhus, Kabare. Muzika. — rekao je kratko.</p>
+        <p>— Sada? — upitala sam, gledajući u sat koji je pokazivao vreme kada se kod nas uveliko gase svetla. — Zar nije kasno?</p>
+        <p>Nasmejao se severnjačkim, mirnim osmehom koji nije priznavao ograničenja. — Why not?</p>
+        <p>Vozili smo se kroz beskrajni sumrak koji je tvrdoglavo odbijao da postane noć. Kad smo stigli pred lokal u Orhusu, stala sam kao ukopana. Iznad vrata je svetleo neonski natpis: WHY NOT? Shvatila sam tada da mi Bo nije ponudio samo izlazak, već mi je te večeri ponudio čitavo odredište. Filozofiju života koja je bila miljama daleko od izolovanog termosa na Remstrupveju.</p>
+        <p>Unutra me je dočekao svet kabarea — šarenilo, buka i energija koju sam gledala širom otvorenih usta. A onda je usledio novi šok. Konobar je pred mene spustio tanjir na kojem su se nalazila tri velika puža u njihovim kućicama. Gledala sam u njih sa istinskim gađenjem, dok se Bo naginjao ka meni, očiju punih vragolastog sjaja.</p>
+        <p>— Try... try, Jasmina. It is good! — ohrabrivao me je, uživajući u mojoj prestravljenoj faci.</p>
+        <p>Zatvorila sam oči, očekujući najgore, i prinela viljušku ustima. Umesto hladne sluzi, osetila sam najsavršeniju, kremastu vanilu i bogatu čokoladu. Bio je to vrhunski sladoled, tako verno oblikovan da me je potpuno porazio. Bo se gromoglasno smejao mom olakšanju, a odnekud se, kao po komandi, stvorio i Morten.</p>
+        <p>Bo i njegova ekipa danima su se spremali za 21. april. Više od dvadeset motora okupilo se tog jutra ispred njegovog stana. Morten je bio vođa kolone, sa nekom ogromnom zastavom koja je lepršala na vetru. Krenuli smo za Hamburg, na koncert. Na autoputu više nije bilo priče, samo vetar i tutnjava motora. Čvrsto sam držala Boa oko struka, osećajući pod rukama njegovu tešku kožnu jaknu i snagu koja nas je nosila kroz sivilo.</p>
+        <p>Negde blizu nemačke granice, Mortenov motor je počeo da štuca. Svi smo stali sa strane. Kiša je počela da sipi, sitna, dosadna. Dok su Bo i Morten psovali na danskom i kopali po mašini, ja sam sedela na braniku i mislila na Valjevo. Morten me je pogledao, sav umazan uljem, i rekao:</p>
+        <p>— Jasmina, don't look so sad. Ovo je deo putovanja. Bez kvara, nema priče.</p>
+        <p>Popravili su ga i stigli smo na vreme u Hamburg. U kožnim jaknama, prašnjavi, ušli smo u zlatnu dvoranu sa crvenim somotom. Stajala sam tamo dok se miris benzina mešao sa parfemima hamburške elite.</p>
+        <p>Pojavio se Chris Rea. Kad je krenula "Josephine", pesma koja je tada bila potpuno nova, svet je prestao da postoji. Ni slutila nisam da će par meseci kasnije postati planetarni hit. Njegov hrapavi glas i "slajd" gitara parali su somot. Boova ruka se spustila na moje rame. Pevao je o čežnji, a ja sam je živela, rastrzana između Valjeva i severa. Taj zvuk se urezao pod kožu zauvek.</p>
+        <p>Ujutru smo bili u luci. Morten je negde nabavio ogromne sendviče sa ribom koji su mirisali na sve samo ne na doručak. Ipak smo ih pojeli. Bo me je držao oko struka, a Morten je pričao viceve o Nemcima koje niko nije razumeo, ali smo se svi smejali. Osetila sam da svet nema granice.</p>
+        <p>Dva meseca u gostima kod kumova je proletelo kao tren. Vratila sam se u Valjevo. Sve je bilo isto, a ja sam bila drugačija. Jednog dana zazvonio je fiksni telefon. Krčanje veze. Podigla sam slušalicu. Sa druge strane — tišina. A onda je krenula muzika. Stivi Vander. "I just called to say I love you..."</p>
+        <p>Slušala sam pesmu do kraja u mraku hodnika. Kad se melodija završila, veza se prekinula. Nikada me više nije pozvao. Možda mu je Morten pomogao da nađe broj, ili mu je Zoran napisao na komadu papira. Nikada neću saznati. Ali znam da je to bio on.</p>
+        <p>Danas, četrdeset godina kasnije, i dalje pamtim tog vikinga u tankerici. Bo me je naučio da kažem "why not" umesto "ne mogu". Pamtim Remstrupvej 36 i crveni somot dvorane u Hamburgu. Možeš da gradiš termose, zagrevaš trotoare i bacaš sneg u jezero, ali ono što ostaje su te pukotine: barmen iz mog grada, ludi Morten i pesma koja je preletela Evropu samo da bi mi rekla ono što nismo umeli da izgovorimo.</p>
+        <p>Dok god se negde u daljini čuje hrapavi glas Chrisa Rea, ja ću biti tamo — na granici između dva sveta, u kožnoj jakni koja još uvek miriše na severni sumrak i slobodu.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KONTAKT -->
+<section id="kontakt">
+  <div class="section-label">Kontakt</div>
+  <h2 class="section-heading">Pišite mi</h2>
+  <p class="kontakt-intro">
+    Za razgovore o knjigama, medijsku saradnju ili sve što vas zanima —
+    poruka uvek nađe put.
+  </p>
+
+  <!-- Netlify Form: kada se sajt postavi na Netlify, poruke stižu direktno na j.bobovac@gmail.com -->
+  <form class="kontakt-form" action="https://formspree.io/f/mjgaqrvn" method="POST">
+    <input type="hidden" name="_subject" value="Nova poruka sa sajta jasminabobovac" />
+    <div class="form-group">
+      <label for="ime">Ime</label>
+      <input type="text" id="ime" name="ime" placeholder="Vaše ime" required />
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" placeholder="vasa@adresa.com" required />
+    </div>
+    <div class="form-group">
+      <label for="poruka">Poruka</label>
+      <textarea id="poruka" name="poruka" placeholder="Vaša poruka..."></textarea>
+    </div>
+    <button type="submit" class="form-submit">Pošalji →</button>
+  </form>
+  <p style="margin-top:1.5rem;font-family:'DM Mono','Courier New',monospace;font-size:0.65rem;letter-spacing:0.1em;color:var(--warm-mid);">
+    Ili pišite direktno na <a href="/cdn-cgi/l/email-protection#305a1e525f525f46515370575d51595c1e535f5d" style="color:var(--rust);text-decoration:none;"><span class="__cf_email__" data-cfemail="375d195558555841565477505a565e5b1954585a">[email&#160;protected]</span></a>
+  </p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-name">Jasmina Bobovac</span>
+  <span class="footer-copy">© 2025 · Sva prava zadržana</span>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // Toggle priča
+  function togglePrica(id) {
+    const prica = document.getElementById('prica-' + id);
+    const arrow = document.getElementById('arrow-' + id);
+    if (prica.style.display === 'none') {
+      prica.style.display = 'block';
+      if (arrow) arrow.textContent = 'Zatvori ↑';
+      prica.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      prica.style.display = 'none';
+      if (arrow) arrow.textContent = 'Čitaj priču →';
+    }
+  }
+
+  // Scroll reveal disabled for compatibility
+
+  // Form submit
+  function handleNetlifySubmit(e) {
+    e.preventDefault();
+    const form = e.target;
+    const btn = form.querySelector('.form-submit');
+    btn.textContent = 'Šaljem...';
+    btn.disabled = true;
+    
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(new FormData(form)).toString()
+    })
+    .then(() => {
+      btn.textContent = 'Poslato ✓';
+      btn.style.background = '#4a7a4a';
+      form.reset();
+      setTimeout(() => {
+        btn.textContent = 'Pošalji →';
+        btn.style.background = '';
+        btn.disabled = false;
+      }, 4000);
+    })
+    .catch(() => {
+      // Fallback: open email client
+      const ime = form.querySelector(
