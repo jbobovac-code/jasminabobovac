@@ -7,6 +7,66 @@
 <style>
   /* System font fallbacks - no external dependency */
   @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Mono:ital,wght@0,300;1,300&display=swap');
+
+  /* ── KUPOVINA ── */
+  #kupovina {
+    background: var(--ink);
+    padding: 7rem 6rem;
+  }
+
+  .kupovina-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    max-width: 860px;
+    margin: 3rem auto 0;
+  }
+
+  @media (max-width: 640px) {
+    .kupovina-grid { grid-template-columns: 1fr; }
+  }
+
+  .kupovina-card {
+    border: 1px solid rgba(200,191,175,0.15);
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .kupovina-lang {
+    font-family: 'DM Mono', 'Courier New', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--rust-light);
+  }
+
+  .kupovina-opis {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 0.92rem;
+    line-height: 1.85;
+    color: rgba(200,191,175,0.75);
+    font-style: italic;
+    flex: 1;
+  }
+
+  .kupovina-link {
+    display: inline-block;
+    font-family: 'DM Mono', 'Courier New', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--cream);
+    background: var(--rust);
+    padding: 0.85rem 1.8rem;
+    text-decoration: none;
+    transition: background 0.2s;
+    align-self: flex-start;
+  }
+
+  .kupovina-link:hover { background: #a04535; }
+
 </style>
 
 <style>
@@ -815,6 +875,66 @@
 
   .utisci-dugme:hover { background: var(--rust); }
 
+
+  /* ── KUPOVINA ── */
+  #kupovina {
+    background: var(--ink);
+    padding: 7rem 6rem;
+  }
+
+  .kupovina-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    max-width: 860px;
+    margin: 3rem auto 0;
+  }
+
+  @media (max-width: 640px) {
+    .kupovina-grid { grid-template-columns: 1fr; }
+  }
+
+  .kupovina-card {
+    border: 1px solid rgba(200,191,175,0.15);
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .kupovina-lang {
+    font-family: 'DM Mono', 'Courier New', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--rust-light);
+  }
+
+  .kupovina-opis {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 0.92rem;
+    line-height: 1.85;
+    color: rgba(200,191,175,0.75);
+    font-style: italic;
+    flex: 1;
+  }
+
+  .kupovina-link {
+    display: inline-block;
+    font-family: 'DM Mono', 'Courier New', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--cream);
+    background: var(--rust);
+    padding: 0.85rem 1.8rem;
+    text-decoration: none;
+    transition: background 0.2s;
+    align-self: flex-start;
+  }
+
+  .kupovina-link:hover { background: #a04535; }
+
 </style>
 </head>
 
@@ -825,6 +945,7 @@
   <a href="#hero" class="nav-logo">Jasmina Bobovac</a>
   <ul class="nav-links">
     <li><a href="#knjiga">Knjiga</a></li>
+    <li><a href="#kupovina">E-knjiga</a></li>
     <li><a href="#o-meni">O meni</a></li>
     <li><a href="#blog">Tekstovi</a></li>
     <li><a href="#recenzije">Recenzije</a></li>
@@ -866,6 +987,37 @@
       Ja sam videla!
     </p>
     <span class="citat-potpis">— Jasmina Bobovac</span>
+  </div>
+</section>
+
+
+<!-- KUPOVINA -->
+<section id="kupovina">
+  <div style="max-width:860px;margin:0 auto;">
+    <div class="section-label" style="color:var(--rust-light);">E-knjiga</div>
+    <h2 class="section-heading" style="color:var(--cream);">Pročitajte &bdquo;Kako si?&ldquo;</h2>
+
+    <div class="kupovina-grid">
+
+      <div class="kupovina-card">
+        <span class="kupovina-lang">Srpsko izdanje</span>
+        <p class="kupovina-opis">
+          Roman prati ženu koja, suočena sa bolešću, raspadom braka i selidbom između dva grada, preispituje šta joj od dosadašnjeg života zaista ostaje. Bolničke beleške, pisma i sećanja iz mladosti prepliću se u intimnu i nesentimentalnu prozu. Kroz humor i tugu koji se ne isključuju, naslov se ponavlja kao pitanje koje svaki put nosi drugačiju težinu.
+        </p>
+        <a href="https://books2read.com/u/4EOZz0" target="_blank" class="kupovina-link">Kupi e-knjigu &rarr;</a>
+      </div>
+
+      <div class="kupovina-card">
+        <span class="kupovina-lang">English edition</span>
+        <p class="kupovina-opis">
+          <em style="font-style:normal;color:rgba(220,210,195,0.9);">How Are You?</em> is told as a mosaic: hospital diary entries, letters, and memories of youth weave into an intimate, unsentimental portrait of a woman learning what it truly means to answer that question. A story about illness and survival, friendships that last a lifetime, and a woman who &mdash; when life tried to write her off &mdash; decided to write her own ending.
+          <br><br>
+          <span style="font-size:0.85rem;color:rgba(200,191,175,0.5);">&ldquo;You could literally write a book.&rdquo; &mdash; &ldquo;I have, my dear.&rdquo;</span>
+        </p>
+        <a href="https://books2read.com/u/3Jz1xK" target="_blank" class="kupovina-link">Buy e-book &rarr;</a>
+      </div>
+
+    </div>
   </div>
 </section>
 
