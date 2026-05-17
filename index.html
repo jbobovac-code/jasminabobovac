@@ -67,6 +67,75 @@
 
   .kupovina-link:hover { background: #a04535; }
 
+
+  /* ── MOBILE ── */
+  @media (max-width: 768px) {
+
+    /* Nav */
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1.2rem; }
+    .nav-links a { font-size: 0.6rem; }
+
+    /* Hero */
+    #hero { 
+      grid-template-columns: 1fr; 
+      padding: 6rem 1.5rem 3rem;
+      min-height: auto;
+      gap: 2rem;
+    }
+    .hero-content { padding: 0; }
+    .hero-title { font-size: clamp(3rem, 15vw, 5rem); }
+    .book-cover { 
+      width: 220px; 
+      height: 330px; 
+      margin: 0 auto;
+      perspective: none;
+    }
+    .book-cover img { transform: none !important; }
+
+    /* Citat */
+    #citat { padding: 4rem 1.5rem; }
+    .citat-glavna { font-size: 1.2rem; }
+
+    /* Kupovina */
+    #kupovina { padding: 4rem 1.5rem; }
+    .kupovina-grid { grid-template-columns: 1fr; gap: 2rem; }
+
+    /* Knjiga */
+    #knjiga { padding: 4rem 1.5rem; }
+    .knjiga-grid { grid-template-columns: 1fr !important; }
+    .knjiga-detalji { grid-template-columns: 1fr 1fr; }
+
+    /* Recenzije */
+    #recenzije { padding: 4rem 1.5rem; }
+    .recenzija-tekst { font-size: 0.9rem; padding-left: 1rem; }
+    .recenzija-autor { padding-left: 1rem; }
+
+    /* Utisci */
+    #utisci { padding: 4rem 1.5rem; }
+
+    /* O meni */
+    #o-meni { padding: 4rem 1.5rem; }
+    .omeni-grid { grid-template-columns: 1fr !important; }
+    .omeni-portrait { 
+      width: 180px; 
+      height: 220px; 
+      margin: 0 auto 2rem;
+    }
+
+    /* Blog / Tekstovi */
+    #blog { padding: 4rem 1.5rem; }
+    .blog-grid { grid-template-columns: 1fr !important; }
+    #prica-remstrupvej { padding: 1.5rem; margin: 2rem 0 0; }
+
+    /* Kontakt */
+    #kontakt { padding: 4rem 1.5rem; }
+    .kontakt-grid { grid-template-columns: 1fr !important; }
+
+    /* Generalno */
+    .section-heading { font-size: clamp(1.8rem, 8vw, 2.5rem); }
+  }
+
 </style>
 
 <style>
@@ -934,6 +1003,75 @@
   }
 
   .kupovina-link:hover { background: #a04535; }
+
+
+  /* ── MOBILE ── */
+  @media (max-width: 768px) {
+
+    /* Nav */
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1.2rem; }
+    .nav-links a { font-size: 0.6rem; }
+
+    /* Hero */
+    #hero { 
+      grid-template-columns: 1fr; 
+      padding: 6rem 1.5rem 3rem;
+      min-height: auto;
+      gap: 2rem;
+    }
+    .hero-content { padding: 0; }
+    .hero-title { font-size: clamp(3rem, 15vw, 5rem); }
+    .book-cover { 
+      width: 220px; 
+      height: 330px; 
+      margin: 0 auto;
+      perspective: none;
+    }
+    .book-cover img { transform: none !important; }
+
+    /* Citat */
+    #citat { padding: 4rem 1.5rem; }
+    .citat-glavna { font-size: 1.2rem; }
+
+    /* Kupovina */
+    #kupovina { padding: 4rem 1.5rem; }
+    .kupovina-grid { grid-template-columns: 1fr; gap: 2rem; }
+
+    /* Knjiga */
+    #knjiga { padding: 4rem 1.5rem; }
+    .knjiga-grid { grid-template-columns: 1fr !important; }
+    .knjiga-detalji { grid-template-columns: 1fr 1fr; }
+
+    /* Recenzije */
+    #recenzije { padding: 4rem 1.5rem; }
+    .recenzija-tekst { font-size: 0.9rem; padding-left: 1rem; }
+    .recenzija-autor { padding-left: 1rem; }
+
+    /* Utisci */
+    #utisci { padding: 4rem 1.5rem; }
+
+    /* O meni */
+    #o-meni { padding: 4rem 1.5rem; }
+    .omeni-grid { grid-template-columns: 1fr !important; }
+    .omeni-portrait { 
+      width: 180px; 
+      height: 220px; 
+      margin: 0 auto 2rem;
+    }
+
+    /* Blog / Tekstovi */
+    #blog { padding: 4rem 1.5rem; }
+    .blog-grid { grid-template-columns: 1fr !important; }
+    #prica-remstrupvej { padding: 1.5rem; margin: 2rem 0 0; }
+
+    /* Kontakt */
+    #kontakt { padding: 4rem 1.5rem; }
+    .kontakt-grid { grid-template-columns: 1fr !important; }
+
+    /* Generalno */
+    .section-heading { font-size: clamp(1.8rem, 8vw, 2.5rem); }
+  }
 
 </style>
 </head>
